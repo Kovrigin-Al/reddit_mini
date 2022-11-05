@@ -1,3 +1,13 @@
-.App {
-  margin: 50px 0 0 0;
+.body {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+}
+
+.posts {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
 }

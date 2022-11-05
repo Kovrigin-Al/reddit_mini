@@ -1,18 +1,20 @@
 import './style.css'
 import { FaSearch } from 'react-icons/fa';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export function SearchBar() {
 
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(''); 
 
     function handleChange({target}) {
-        setSearch(target.value);
+        // setSearch(target.value);
     }
 
     function handleSubmit() {
 
     }
+
+   
 
     return (
         <div className="header" id='header'>
