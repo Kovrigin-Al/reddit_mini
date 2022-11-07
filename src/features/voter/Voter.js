@@ -29,7 +29,7 @@ export function Voter(props) {
               : "#6f6f6f",
         }}
       >
-        {votes > 1000 ? Math.round(votes/100)/10 + 'k' : votes}
+        {votes > 1000 ? Math.round(votes / 100) / 10 + "k" : votes}
       </p>
       <GoArrowDown
         className="GoArrowDown"

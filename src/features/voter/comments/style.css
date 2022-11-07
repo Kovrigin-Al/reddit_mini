@@ -1,0 +1,33 @@
+.comments {
+    width: auto;
+    height: 150px;
+    overflow-y: scroll;
+    display: none;
+    min-width: 0;
+}
+
+.comment {
+    margin: 0 10px;
+    padding: 5px;
+    /* display: none; */
+    min-width: 0;
+}
+.comments .author {
+    color: blue;
+}
+
+.comment_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment:hover {
+    background-color: rgba(128, 128, 128, 0.1);
+    box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.435);
+}
+
+.comment_body {
+    width: 100%;
+    display: block;
+    word-wrap: normal;
+}
