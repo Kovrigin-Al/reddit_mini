@@ -1,46 +1,54 @@
 .post {
-    box-shadow: 0 1px 2px 0;
-    display: flex;
-    border: 1px solid green;
-    margin: 30px 20px 0 20px;
-    /* max-width: 660px; */
-    background-color: white;
+  box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.635);
+  display: flex;
+  /* border: 1px solid green; */
+  margin: 30px 20px 0 20px;
+  /* max-width: 660px; */
+  background-color: white;
+}
+
+.post:hover {
+  box-shadow: 0 0 4px 4px rgba(128, 128, 128, 0.808);
 }
 
 .post .sideBar {
-    padding: 5px;
-    border: 1px solid blue;
+  padding: 5px;
+  /* border: 1px solid blue; */
 }
 
 .post .main {
-    width: 100%;
+  width: 100%;
 }
 
 .post .topBar {
-    padding: 5px;
-    border: 1px solid red;   
+  padding: 5px;
+  /* border: 1px solid red;    */
 }
 
-.post .middleBar img{
-    width: 100%;
+.post .middleBar img {
+  width: 100%;
 }
 
 .post .bottomBar {
-    padding: 5px;
-    border: 1px solid magenta;   
-    display: flex;
-    justify-content: space-around;
+  padding: 5px;
+  /* border: 1px solid magenta;    */
+  display: flex;
+  justify-content: space-around;
 }
 .post .bottomBar p {
-    width: auto;
-    margin: 0;
-
+  width: auto;
+  margin: 0;
 }
 
-@media only screen and (max-width: 500px)
-{
-    .post {
-        margin-left: 0px;
-        margin-right: 0px;
-    }
+.post .bottomBar strong {
+  width: auto;
+  margin: 0;
+  color: blue;
+}
+
+@media only screen and (max-width: 500px) {
+  .post {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
