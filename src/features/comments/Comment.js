@@ -1,4 +1,4 @@
-import { timeAgo } from "../../../helperFunctions/timeCalculator/timeCalculator";
+import { timeAgo } from "../../helperFunctions/timeCalculator/timeCalculator";
 
 export function Comment(props) {
   return (

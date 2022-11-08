@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Loading } from '../loading/Loading';
 import { Comment } from './Comment';
 import { fetchComments } from './commentsSlice';
 import './style.css';
@@ -29,7 +30,7 @@ const renderList = () => {
 
 useEffect(() => {
     if (commentsStatus === 'succeeded' && comments[props.id]) {
-        result = comments[props.id].map(comment => comment.kind);
+        result = comments[props.id];
         console.log(result);
         renderList();
     }
@@ -39,7 +40,7 @@ useEffect(() => {
 return (
     <div id={props.id} className="comments">
             <hr></hr>
-           <p>{ commentsStatus === 'succeeded' ? result : 'sdafsfdg'}</p>
+           { commentsStatus === 'succeeded' ? result.map((comment) => {return <Comment author={comment.data.author} text={comment.data.body} time={comment.data.created_utc}/>}) : (<Loading />)}
             {/* {result.map((comment) => {return <Comment author={comment.data.author} text={comment.data.body} time={comment.data.created_utc}/>})} */}
         </div>
     );

@@ -2,6 +2,7 @@ import { Post } from "./Post";
 import { useEffect } from "react";
 import { fetchPosts, selectPosts } from "./postsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Loading } from "../../features/loading/Loading";
 
 export function Posts() {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ export function Posts() {
   return (
     <>
       <div id="top"></div>
-      {postsStatus === 'pending' ? <p>Loading</p> :
+      {postsStatus === 'pending' ? <Loading/> :
       postsStatus === 'error' ? <p>{postsError}</p>  :
       posts.map((post) => (
         <Post

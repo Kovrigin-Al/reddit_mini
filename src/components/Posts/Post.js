@@ -4,10 +4,10 @@ import "./style.css";
 // import pluralize from "pluralize";
 import { Voter } from "../../features/voter/Voter";
 import {FaRegCommentAlt} from 'react-icons/fa'
-import { Comments } from "../../features/voter/comments/Comments";
+import { Comments } from "../../features/comments/Comments";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../../helperFunctions/timeCalculator/timeCalculator";
-import { fetchComments } from "../../features/voter/comments/commentsSlice";
+import { fetchComments } from "../../features/comments/commentsSlice";
 
 
 export function Post(props) {
@@ -27,7 +27,7 @@ export function Post(props) {
     // .then((response) => response.json())
     // .then((jsonResponse) => {setComments(jsonResponse)})
     // .catch((err) => {console.log(err)})}
-    // setCommentsVisibility(commentsVisibility ? false : true);
+    setCommentsVisibility(commentsVisibility ? false : true);
     // setCommentsAreLoading(commentsAreLoading ? false : true);
   }
 
