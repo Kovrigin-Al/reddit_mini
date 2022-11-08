@@ -16,9 +16,14 @@ const options = {
     builder.addCase(fetchPosts.fulfilled, (state, action) => {
       state.status = "succeeded";
       state.posts = action.payload;
-    });
-    //.addCase(fetchPosts.pending, (state, action) => {})
-    //.addCase(fetchPosts.rejected, (state, action) => {})
+    })
+    .addCase(fetchPosts.pending, (state, action) => {
+      state.status = "pending";
+    })
+    .addCase(fetchPosts.rejected, (state, action) => {
+      state.status = "error";
+      state.error = action.payload;
+    })
   },
 };
 

@@ -8,6 +8,7 @@ export function Posts() {
 
   const postsStatus = useSelector((state) => state.posts.status);
   const searchQuery = useSelector((state) => state.searchBar.searchQuery);
+  const postsError = useSelector((state) => state.posts.error);
 
   useEffect(() => {
     if (postsStatus === "idle" || "succeeded") {
@@ -19,7 +20,9 @@ export function Posts() {
   return (
     <>
       <div id="top"></div>
-      {posts.map((post, index) => (
+      {postsStatus === 'pending' ? <p>Loading</p> :
+      postsStatus === 'error' ? <p>{postsError}</p>  :
+      posts.map((post) => (
         <Post
           key={post.data.id}
           title={post.data.title}
@@ -38,5 +41,5 @@ export function Posts() {
         />
       ))}
     </>
-  );
+ );
 }

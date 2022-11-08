@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectPosts } from "./postsSlice";
 import "./style.css";
 // import pluralize from "pluralize";
@@ -7,22 +7,28 @@ import {FaRegCommentAlt} from 'react-icons/fa'
 import { Comments } from "../../features/voter/comments/Comments";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../../helperFunctions/timeCalculator/timeCalculator";
+import { fetchComments } from "../../features/voter/comments/commentsSlice";
 
 
 export function Post(props) {
 
   const [comments, setComments] = useState(['0',{data: {children: []}}])
   const [commentsVisibility, setCommentsVisibility] = useState(true);
+  // const [commentsAreLoading, setCommentsAreLoading] = useState(false);
+  const dispatch = useDispatch();
+  const commentsInStore = useSelector((state) => state.comments.comments[props.id])
 
   const handleClick = () => {
     const element = document.getElementById(props.id);
-    console.log(element);
     element.style.display = commentsVisibility ? 'block' : 'none';
-    if (commentsVisibility) {fetch('https://www.reddit.com'+props.permalink+'.json')
-    .then((response) => response.json())
-    .then((jsonResponse) => {setComments(jsonResponse)})
-    .catch((err) => {console.log(err)})}
-    setCommentsVisibility(commentsVisibility ? false : true);
+
+    if (commentsVisibility && !commentsInStore){dispatch(fetchComments({url: 'https://www.reddit.com'+props.permalink+'.json', postId: props.id}))};
+    // if (commentsVisibility) {fetch('https://www.reddit.com'+props.permalink+'.json')
+    // .then((response) => response.json())
+    // .then((jsonResponse) => {setComments(jsonResponse)})
+    // .catch((err) => {console.log(err)})}
+    // setCommentsVisibility(commentsVisibility ? false : true);
+    // setCommentsAreLoading(commentsAreLoading ? false : true);
   }
 
   return (
@@ -59,7 +65,8 @@ export function Post(props) {
             <FaRegCommentAlt className="FaRegCommentAlt"/>
           </p>
         </div>
-      <Comments id={props.id} comments={comments[1].data.children}/>
+        {/* {commentsAreLoading ? "loading" : ''} */}
+      <Comments /*commentsAreLoading={commentsAreLoading}*/ id={props.id} comments={comments[1].data.children}/>
       </div>
     </div>
     </>

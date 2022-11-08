@@ -3,11 +3,26 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 const options ={
     name: 'comments',
     initialState: {
+        comments: {"postId": ['0',{data: {children: []}}]},
         status: 'idle',
-
+        error: ''
     },
     reducers: {
 
+    },
+    extraReducers(builder) {
+      builder.addCase(fetchComments.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.comments[action.payload.postId] = action.payload.comments;
+      })
+      builder.addCase(fetchComments.pending, (state, action) => {
+        state.status = 'pending';
+
+      })
+      builder.addCase(fetchComments.rejected, (state, action) => {
+        state.status = 'error';
+        state.error = action.payload;
+      })
     }
 }
 
@@ -16,15 +31,16 @@ const options ={
 export const commentsSlice = createSlice(options);
 export const fetchComments = createAsyncThunk(
     'comments/fetchComments',
-    async (url, thunkAPI) => {
-    const response = await fetch('https://www.reddit.com'+url+'.json');
+    async ({url, postId}, thunkAPI) => {
+    const response = await fetch(url);
     const jsonResponse = await response.json();
-    return jsonResponse
+    const comments = jsonResponse[1].data.children;
+    return {comments, postId}
     }
 )
 export default commentsSlice.reducer;
 
-
+export const selectComments = (id, state) => state.comments[id][1].children;
 
 /*
 {
