@@ -1,17 +1,23 @@
 .voter {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
 }
 
 .GoArrowDown {
-    height: 20px;
-    
+  height: 20px;
 }
 
 .GoArrowUp {
-    height: 20px;
-    
+  height: 20px;
+}
+
+.GoArrowDown:hover {
+  cursor: pointer;
+}
+
+.GoArrowUp:hover {
+  cursor: pointer;
 }

@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { GoArrowUp, GoArrowDown } from "react-icons/go";
+import { formating } from "../../helperFunctions/formatingQuantity";
 import "./style.css";
-
-// useEffect( () => {
-//     votes === props.votes ? setColor
-// }, [votes]
-// )
 
 export function Voter(props) {
   const [votes, setVotes] = useState(props.votes);
   return (
     <div className="voter">
+
       <GoArrowUp
         className="GoArrowUp"
         type="button"
@@ -19,6 +16,8 @@ export function Voter(props) {
         }
         style={{ color: votes > props.votes ? "green" : "#6f6f6f" }}
       />
+      
+      {/* votes quantity */}
       <p
         style={{
           color:
@@ -29,8 +28,9 @@ export function Voter(props) {
               : "#6f6f6f",
         }}
       >
-        {votes > 1000 ? Math.round(votes / 100) / 10 + "k" : votes}
+        {formating(votes)}
       </p>
+
       <GoArrowDown
         className="GoArrowDown"
         onClick={() =>

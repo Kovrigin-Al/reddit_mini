@@ -7,40 +7,32 @@ const options = {
     status: "idle",
     error: null,
   },
-  reducers: {
-    // addPosts: (state, action) => {
-    //     state.posts = action.payload;
-    // }
-  },
+  reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchPosts.fulfilled, (state, action) => {
-      state.status = "succeeded";
-      state.posts = action.payload;
-    })
-    .addCase(fetchPosts.pending, (state, action) => {
-      state.status = "pending";
-    })
-    .addCase(fetchPosts.rejected, (state, action) => {
-      state.status = "error";
-      state.error = action.payload;
-    })
+    builder
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts = action.payload;
+      })
+      .addCase(fetchPosts.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "error";
+        state.error = action.error.message;
+      });
   },
 };
 
 const postsSlice = createSlice(options);
 
-export const selectPosts = (state) => state.posts.posts;
-
 export const { addPosts } = postsSlice.actions;
 export default postsSlice.reducer;
 export const fetchPosts = createAsyncThunk(
   "posts/fetchPosts",
-  async (x, thunkAPI) => {
+  async (arg, thunkAPI) => {
     const { getState } = thunkAPI;
     const state = getState();
-    // console.log(state.searchBar)
-    // console.log('https://www.reddit.com/' + state.searchBar.searchQuery + '.json?limit=' + state.searchBar.limit);
-    // const response = await fetch('https://www.reddit.com/.json?limit=10')
     const url = state.searchBar.searchQuery
       ? `https://www.reddit.com/search.json?q=${
           state.searchBar.searchQuery

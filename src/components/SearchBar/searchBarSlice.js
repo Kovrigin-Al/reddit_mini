@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const options = {
   name: "searchBar",
   initialState: {
     searchQuery: "",
-    limit: 2,
+    limit: 12,
   },
   reducers: {
     updateQuery: (state, action) => {

@@ -1,12 +1,13 @@
 import "./style.css";
 import { FaSearch } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateQuery } from "./searchBarSlice";
 import { useDispatch } from "react-redux";
 
 export function SearchBar() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
+
   function handleChange({ target }) {
     setSearch(target.value);
   }
@@ -16,18 +17,21 @@ export function SearchBar() {
     dispatch(updateQuery(search));
   }
 
+  //this clears search query when clicked on logo
   const handleClick = () => {
     dispatch(updateQuery(""));
   };
 
   return (
     <div className="header">
+      
       <div className="logo container">
         <a href="#top" onClick={handleClick}>
           <img alt="logo" src={require("./logo.png")} />
           <p className="site-name hide">RedditMini</p>
         </a>
       </div>
+
       <div className="search-bar container">
         <form onSubmit={handleSubmit}>
           <input
@@ -40,6 +44,7 @@ export function SearchBar() {
           </button>
         </form>
       </div>
+
     </div>
   );
 }

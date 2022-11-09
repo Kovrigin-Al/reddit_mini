@@ -2,14 +2,12 @@
     width: auto;
     height: 150px;
     overflow-y: scroll;
-    /* display: none; */
     min-width: 0;
 }
 
 .comment {
     margin: 0 10px;
     padding: 5px;
-    /* display: none; */
     min-width: 0;
 }
 .comments .author {

@@ -1,9 +1,7 @@
 .post {
   box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.635);
   display: flex;
-  /* border: 1px solid green; */
   margin: 30px 20px 0 20px;
-  /* max-width: 660px; */
   background-color: white;
   flex-wrap: nowrap;
 }
@@ -14,17 +12,16 @@
 
 .post .sideBar {
   padding: 5px;
-  /* border: 1px solid blue; */
 }
 
 .post .main {
- min-width: 0;
- padding: 10px;
+  min-width: 0;
+  padding: 10px;
+  width: 100%;
 }
 
 .post .topBar {
   padding: 5px;
-  /* border: 1px solid red;    */
 }
 
 .post .middleBar {
@@ -38,7 +35,6 @@
 
 .post .bottomBar {
   padding: 5px;
-  /* border: 1px solid magenta;    */
   display: flex;
   justify-content: space-around;
 }
@@ -63,4 +59,8 @@
 .FaRegCommentAlt {
   height: 12px;
   width: 17px;
+}
+
+.comments-quantity:hover {
+  cursor: pointer;
 }
