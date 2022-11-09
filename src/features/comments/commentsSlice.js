@@ -8,15 +8,24 @@ const options ={
         error: ''
     },
     reducers: {
-
+      // 'addCommentsStructure': (state, action) => {
+      //   state.comments = {[action.payload]: {isShowing: true,
+      //     isLoading: true}}
+      // }
     },
     extraReducers(builder) {
       builder.addCase(fetchComments.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.comments[action.payload.postId] = action.payload.comments;
+        state.comments[action.payload.postId] = {commentsArr: action.payload.comments,
+        isShowing: true,
+        isLoading: false,
+        status: 'succeeded'
+        }
+
       })
       builder.addCase(fetchComments.pending, (state, action) => {
-        state.status = 'pending';
+        state.comments[action.meta.arg.postId] = {isLoading: true, isShowing: true};
+
 
       })
       builder.addCase(fetchComments.rejected, (state, action) => {
@@ -31,7 +40,8 @@ const options ={
 export const commentsSlice = createSlice(options);
 export const fetchComments = createAsyncThunk(
     'comments/fetchComments',
-    async ({url, postId}, thunkAPI) => {
+    async ({url, postId}, {dispatch}) => {
+    // dispatch(commentsSlice.actions.addCommentsStructure(postId));
     const response = await fetch(url);
     const jsonResponse = await response.json();
     const comments = jsonResponse[1].data.children;
@@ -39,7 +49,7 @@ export const fetchComments = createAsyncThunk(
     }
 )
 export default commentsSlice.reducer;
-
+export const selectCommentsByPostId = (state, postId) => state.comments.comments[postId];
 export const selectComments = (id, state) => state.comments[id][1].children;
 
 /*

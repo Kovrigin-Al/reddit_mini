@@ -2,7 +2,7 @@
     width: auto;
     height: 150px;
     overflow-y: scroll;
-    display: none;
+    /* display: none; */
     min-width: 0;
 }
 

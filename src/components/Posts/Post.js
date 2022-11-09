@@ -7,28 +7,22 @@ import {FaRegCommentAlt} from 'react-icons/fa'
 import { Comments } from "../../features/comments/Comments";
 import { useEffect, useState } from "react";
 import { timeAgo } from "../../helperFunctions/timeCalculator/timeCalculator";
-import { fetchComments } from "../../features/comments/commentsSlice";
+import { fetchComments, selectCommentsByPostId } from "../../features/comments/commentsSlice";
+import { Loading } from "../../features/loading/Loading";
 
 
 export function Post(props) {
 
-  const [comments, setComments] = useState(['0',{data: {children: []}}])
-  const [commentsVisibility, setCommentsVisibility] = useState(true);
-  // const [commentsAreLoading, setCommentsAreLoading] = useState(false);
+  const [commentsLoaded, setCommentsLoaded] = useState(false)
+  const [commentsVisibility, setCommentsVisibility] = useState(false);
   const dispatch = useDispatch();
-  const commentsInStore = useSelector((state) => state.comments.comments[props.id])
-
   const handleClick = () => {
-    const element = document.getElementById(props.id);
-    element.style.display = commentsVisibility ? 'block' : 'none';
-
-    if (commentsVisibility && !commentsInStore){dispatch(fetchComments({url: 'https://www.reddit.com'+props.permalink+'.json', postId: props.id}))};
-    // if (commentsVisibility) {fetch('https://www.reddit.com'+props.permalink+'.json')
-    // .then((response) => response.json())
-    // .then((jsonResponse) => {setComments(jsonResponse)})
-    // .catch((err) => {console.log(err)})}
     setCommentsVisibility(commentsVisibility ? false : true);
-    // setCommentsAreLoading(commentsAreLoading ? false : true);
+
+    if (!commentsLoaded) {
+      dispatch(fetchComments({url: 'https://www.reddit.com'+props.permalink+'.json', postId: props.id}));
+      setCommentsLoaded(true);
+    };
   }
 
   return (
@@ -65,8 +59,8 @@ export function Post(props) {
             <FaRegCommentAlt className="FaRegCommentAlt"/>
           </p>
         </div>
-        {/* {commentsAreLoading ? "loading" : ''} */}
-      <Comments /*commentsAreLoading={commentsAreLoading}*/ id={props.id} comments={comments[1].data.children}/>
+      
+      {commentsVisibility ? <Comments id={props.id}/> : ''}
       </div>
     </div>
     </>

@@ -21,6 +21,7 @@ export function Subreddits() {
         subredditName: subreddit.display_name,
         url: subreddit.display_name_prefixed,
         pic: subreddit.icon_img,
+        id: subreddit.id
       };
     }
   );
@@ -34,6 +35,7 @@ export function Subreddits() {
       {subreddits.map((subreddit) => {
         return (
           <Subreddit
+          key={subreddit.id}
             subredditName={subreddit.subredditName}
             url={subreddit.url}
             pic={subreddit.pic}

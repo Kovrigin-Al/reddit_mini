@@ -4,7 +4,7 @@ const options = {
   name: "searchBar",
   initialState: {
     searchQuery: "",
-    limit: 12,
+    limit: 2,
   },
   reducers: {
     updateQuery: (state, action) => {
